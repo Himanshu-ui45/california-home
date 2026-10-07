@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CalifAI | House Price Predictor</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                C
+            </div>
+
+            <div>
+                <span class="brand-name">
+                    Calif<span>AI</span>
+                </span>
+
+                <small>
+                    House Intelligence
+                </small>
+            </div>
+
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            MODEL ONLINE
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-copy">
+
+                <div class="eyebrow">
+                    ✦ MACHINE LEARNING POWERED
+                </div>
+
+                <h1>
+                    Predict the value of a
+                    <br>
+                    <span>California home.</span>
+                </h1>
+
+                <p>
+                    Enter the property details below and let your
+                    machine-learning model estimate the median house value.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- APPLICATION -->
+
+        <section class="app-grid">
+
+
+            <!-- FORM CARD -->
+
+            <div class="card form-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <div class="section-tag">
+                            PROPERTY DATA
+                        </div>
+
+                        <h2>
+                            Tell us about the home
+                        </h2>
+
+                    </div>
+
+                    <div class="step">
+                        01 / 02
+                    </div>
+
+                </div>
+
+
+                <form id="predictionForm">
+
+                    <div class="fields-grid">
+
+                        {% for col in columns %}
+
+                        <div class="field">
+
+                            <label for="{{ col }}">
+                                {{ col.replace('_', ' ')|title }}
+                            </label>
+
+                            <div class="input-wrap">
+
+                                <span class="input-icon">
+                                    ◆
+                                </span>
+
+                                <input
+                                    id="{{ col }}"
+                                    name="{{ col }}"
+                                    type="number"
+                                    step="any"
+                                    required
+                                    placeholder="Enter {{ col.replace('_', ' ').lower() }}"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="predict-btn"
+                        id="predictBtn">
+
+                        <span id="btnText">
+                            Generate Prediction
+                        </span>
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="tip">
+
+                    <span>💡</span>
+
+                    <p>
+                        Use values in the same scale and units used
+                        when training your model.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULT CARD -->
+
+            <div class="card result-card"
+                 id="resultCard">
+
+                <div class="result-top">
+
+                    <div class="section-tag">
+                        AI ESTIMATE
+                    </div>
+
+                    <div class="pulse-ring">
+                        <span></span>
+                    </div>
+
+                </div>
+
+
+                <div class="result-content">
+
+
+                    <!-- BEFORE PREDICTION -->
+
+                    <div class="result-placeholder"
+                         id="placeholder">
+
+                        <div class="big-house">
+                            ⌂
+                        </div>
+
+                        <h3>
+                            Your prediction
+                            <br>
+                            will appear here.
+                        </h3>
+
+                        <p>
+                            Complete the property details and click
+                            Generate Prediction.
+                        </p>
+
+                    </div>
+
+
+                    <!-- RESULT -->
+
+                    <div class="result-value hidden"
+                         id="resultValue">
+
+                        <p>
+                            Estimated median house value
+                        </p>
+
+                        <div class="price"
+                             id="price">
+
+                            $0
+
+                        </div>
+
+                        <div class="confidence">
+                            MODEL PREDICTION
+                        </div>
+
+                    </div>
+
+
+                    <!-- ERROR -->
+
+                    <div class="error-box hidden"
+                         id="errorBox">
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-footer">
+
+                    <span>
+                        Powered by your trained ML model
+                    </span>
+
+                    <span>
+                        ● Flask API
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>
+                CALIFAI © 2026
+            </span>
+
+            <span>
+                Built with Python • Flask • NumPy • Scikit-learn
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}">
+    </script>
+
+</body>
+
+</html>
